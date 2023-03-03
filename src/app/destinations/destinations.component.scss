@@ -1,0 +1,10 @@
+.links {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+    & > * {
+      margin: 5px;
+    }
+  }

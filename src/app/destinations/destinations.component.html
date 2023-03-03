@@ -1,0 +1,19 @@
+<div>
+  <mat-button-toggle-group
+    [formControl]="isDreamDestinationForm"
+    aria-label="Destinations"
+  >
+    <mat-button-toggle [value]="false">All</mat-button-toggle>
+    <mat-button-toggle [value]="true">Dream</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+<div class="links">
+  <a
+    mat-raised-button
+    *ngFor="let destination of destinations | async"
+    [routerLink]="['/tickets', destination.code]"
+    color="primary"
+  >
+    {{ destination.name }}
+  </a>
+</div>
