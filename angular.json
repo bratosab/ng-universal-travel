@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-universal-travel",
+            "outputPath": "dist/ng-universal-travel/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -97,6 +97,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/ng-universal-travel/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "ng-universal-travel:build:development",
+              "serverTarget": "ng-universal-travel:server:development"
+            },
+            "production": {
+              "browserTarget": "ng-universal-travel:build:production",
+              "serverTarget": "ng-universal-travel:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-universal-travel:build:production",
+              "serverTarget": "ng-universal-travel:server:production"
+            },
+            "development": {
+              "browserTarget": "ng-universal-travel:build:development",
+              "serverTarget": "ng-universal-travel:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
